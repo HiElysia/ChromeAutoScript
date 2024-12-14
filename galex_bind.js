@@ -139,11 +139,6 @@ async function mainLogic() {
 
         console.log('Galxe自动化社交设置推特脚本结束');
     } else if (currentURL.startsWith('https://app.galxe.com/quest/')) {
-        //  一直判断是否可以Claim
-        setInterval(() => {
-            checkClaim();
-        }, 2000);
-
         await delay(5000);
 
         console.log('Galxe自动化任务交互脚本启动');
@@ -151,6 +146,7 @@ async function mainLogic() {
 
         for (let taskButtonIndex of taskButtonList) {
             let taskButtonText = taskButtonIndex.innerText.toLowerCase();
+            console.log('Galxe 任务名称' + taskButtonText);
             //  任务已完成就退出
             if (taskButtonIndex.querySelectorAll('div.text-success').length > 0) {
                 console.log('Galxe自动化任务交互脚本(已完成) == ',taskButtonText);
@@ -210,6 +206,11 @@ async function mainLogic() {
         } else {  //  出现在任务页里面
             await checkAllTaskState();
         }
+        //  一直判断是否可以Claim
+        setInterval(() => {
+            checkClaim();
+        }, 2000);
+
     }
 }
 
